@@ -1,0 +1,8 @@
+**/.yarn/**
+**/node_modules/**
+**/dist/**
+**/.eslintrc.js
+**/*.json
+buildResources/**
+assets/**
+configs/**

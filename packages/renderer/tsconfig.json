@@ -1,0 +1,27 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "skipLibCheck": true,
+    "jsx": "react-jsx",
+    "baseUrl": "./src/",
+    "paths": {
+      "package.json": [
+        "../../../package.json"
+      ],
+      "CONSTANTS": [
+        "../../lib/CONSTANTS.ts",
+      ],
+      "DEFAULTS": [
+        "../../lib/DEFAULTS.ts",
+      ]
+    },
+    "lib": [
+      "ESNext", 
+      "dom"
+    ]
+  },
+  "include": [
+    "src/**/*", 
+    "../lib/types/*"
+  ]
+}

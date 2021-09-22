@@ -1,0 +1,21 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": "./src/",
+    "paths": {
+      "package.json": [
+        "../../../package.json"
+      ],
+      "CONSTANTS": [
+        "../../lib/CONSTANTS.ts",
+      ],
+      "DEFAULTS": [
+        "../../lib/DEFAULTS.ts",
+      ]
+    },
+  },
+  "include": [
+     "src/**/*", 
+    "../lib/types/*"
+  ],
+}

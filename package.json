@@ -1,0 +1,206 @@
+{
+  "productName": "Cloudfarm Desktop Client",
+  "appId": "org.client.desktop.cloudfarm",
+  "name": "cloudfarm-desktop-client",
+  "version": "1.0.0",
+  "description": "Cloudfarm's desktop mining client",
+  "author": "Cloudfarm.us",
+  "license": "MIT",
+  "homepage": "https://cloudfarm.us",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cloudfarm-us/desktop-client",
+    "user": "cloudfarm-us",
+    "repo": "desktop-client"
+  },
+  "bugs": {
+    "url": "https://github.com/cloudfarm-us/desktop-client/issues"
+  },
+  "engines": {
+    "node": ">=v16",
+    "yarn": ">=3.0"
+  },
+  "main": "packages/main/dist/index.cjs",
+  "scripts": {
+    "test": "cross-env MODE=testing yarn run build && node tests/app.spec.js",
+    "start": "cross-env MODE=development node -r esbuild-register scripts/start.ts",
+    "preview": "cross-env MODE=production node -r esbuild-register scripts/start.ts",
+    "lint": "eslint . --ext js,ts,tsx",
+    "typecheck-main": "tsc --noEmit -p packages/main/tsconfig.json",
+    "typecheck-preload": "tsc --noEmit -p packages/preload/tsconfig.json",
+    "typecheck-renderer": "tsc --noEmit -p packages/renderer/tsconfig.json",
+    "typecheck": "yarn run typecheck-main && yarn run typecheck-preload && yarn run typecheck-renderer",
+    "asar-list": "asar list dist/mac/electronViteBP.app/Contents/Resources/app.asar",
+    "package": "cross-env MODE=production yarn run build && node -r esbuild-register scripts/package.ts",
+    "package-no-asar": "cross-env MODE=production yarn run build && node -r esbuild-register scripts/package.ts --no-asar",
+    "build": "cross-env MODE=production node -r esbuild-register scripts/build.ts",
+    "update-electron-vendors": "node -r esbuild-register scripts/update-electron-vendors.ts",
+    "ci": "cross-env MODE=production node -r esbuild-register scripts/ci.ts",
+    "release": "release-it",
+    "commit": "git add . && git status && cz"
+  },
+  "devDependencies": {
+    "@release-it/conventional-changelog": "^3.3.0",
+    "@types/electron-devtools-installer": "^2.2.0",
+    "@types/i18n-js": "^3.8.2",
+    "@types/react": "^17.0.24",
+    "@types/react-dom": "^17.0.9",
+    "@types/react-router-dom": "^5.3.0",
+    "@types/rimraf": "^3.0.2",
+    "@types/strip-final-newline": "^3.0.0",
+    "@types/yup": "^0.29.13",
+    "@typescript-eslint/eslint-plugin": "4.31.2",
+    "@typescript-eslint/parser": "4.31.2",
+    "@vitejs/plugin-react-refresh": "^1.3.6",
+    "chalk": "^4.1.2",
+    "commitizen": "^4.2.4",
+    "cross-env": "^7.0.3",
+    "cz-emoji": "^1.3.1",
+    "dotenv": "^10.0.0",
+    "electron": "15.0.0",
+    "electron-builder": "^22.11.7",
+    "electron-devtools-installer": "^3.2.0",
+    "esbuild": "^0.12.28",
+    "esbuild-register": "^3.0.0",
+    "eslint": "7.32.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-airbnb-typescript": "^14.0.0",
+    "eslint-import-resolver-typescript": "^2.5.0",
+    "eslint-plugin-arca": "^0.11.1",
+    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-react": "^7.26.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "ink": "^3.0.9",
+    "ink-spinner": "^4.0.2",
+    "prettier": "^2.4.1",
+    "release-it": "^14.11.6",
+    "rimraf": "^3.0.2",
+    "spectron": "^15.0.0",
+    "strip-final-newline": "^3.0.0",
+    "typescript": "4.4.3",
+    "vite": "2.6.0-beta.0",
+    "vite-tsconfig-paths": "^3.3.14"
+  },
+  "dependencies": {
+    "@chakra-ui/react": "^1.6.8",
+    "@emotion/react": "^11.4.1",
+    "@emotion/styled": "^11.3.0",
+    "@hookform/resolvers": "^2.8.1",
+    "electron-store": "^8.0.0",
+    "electron-updater": "^4.3.9",
+    "electron-util": "^0.17.2",
+    "firebase": "9.0.2",
+    "framer-motion": "^4.1.17",
+    "i18n-js": "4.0.0-alpha.11",
+    "node-machine-id": "^1.1.12",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-error-boundary": "^3.1.3",
+    "react-hook-form": "^7.15.4",
+    "react-icons": "^4.2.0",
+    "react-router-dom": "^5.3.0",
+    "recoil": "^0.4.1",
+    "tree-kill": "^1.2.2",
+    "yup": "^0.32.9"
+  },
+  "prettier": {
+    "tabWidth": 2,
+    "useTabs": false,
+    "semi": true,
+    "singleQuote": true,
+    "jsxSingleQuote": true,
+    "trailingComma": "all"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "cross-env NODE_ENV=development eslint --cache"
+    ],
+    "*.json,.{eslintrc,prettierrc}": [
+      "prettier --ignore-path .eslintignore --parser json --write"
+    ],
+    "*.{css,scss}": [
+      "prettier --ignore-path .eslintignore --single-quote --write"
+    ],
+    "*.{html,md,yml}": [
+      "prettier --ignore-path .eslintignore --single-quote --write"
+    ]
+  },
+  "browserslist": [
+    "Chrome 94"
+  ],
+  "electron": {
+    "vendors": {
+      "chrome": "94",
+      "node": "16"
+    }
+  },
+  "release-it": {
+    "git": {
+      "commitMessage": "chore: release v${version}"
+    },
+    "github": {
+      "release": false
+    },
+    "npm": {
+      "publish": false
+    },
+    "plugins": {
+      "@release-it/conventional-changelog": {
+        "infile": "CHANGELOG.md",
+        "preset": {
+          "name": "conventionalcommits",
+          "types": [
+            {
+              "type": "feat",
+              "section": "Features"
+            },
+            {
+              "type": "fix",
+              "section": "Bug Fixes"
+            },
+            {
+              "type": "chore",
+              "hidden": true
+            },
+            {
+              "type": "docs",
+              "hidden": true
+            },
+            {
+              "type": "style",
+              "hidden": true
+            },
+            {
+              "type": "refactor",
+              "hidden": true
+            },
+            {
+              "type": "perf",
+              "hidden": true
+            },
+            {
+              "type": "test",
+              "hidden": true
+            }
+          ]
+        }
+      }
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-emoji"
+    },
+    "cz-emoji": {
+      "symbol": true,
+      "skipQuestions": [
+        "scope",
+        "issues",
+        "body",
+        "breaking"
+      ],
+      "scopes": []
+    }
+  }
+}

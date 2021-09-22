@@ -1,0 +1,7 @@
+// prettier-ignore
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "jsx": "react"
+  },
+}

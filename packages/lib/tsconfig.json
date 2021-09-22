@@ -1,0 +1,14 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "skipLibCheck": false,
+    "baseUrl": ".",
+  },
+  "files": [
+    "./CONSTANTS.ts",
+    "./DEFAULTS.ts"
+  ],
+  "include": [
+    "types/*"
+  ]
+}

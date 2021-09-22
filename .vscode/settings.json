@@ -1,0 +1,28 @@
+
+{
+  "editor.tabSize": 2,
+  "files.exclude": {
+    ".github": true,
+    ".yarn": true,
+    "**/dist": true,
+    // "assets": true,
+    // "buildResources": true,
+    // "configs": true,
+    "node_modules": true,
+    ".eslintignore": true,
+    ".gitattributes": true,
+    ".gitignore": true,
+    ".yarnrc.yml": true,
+    // "README.md": true,
+    // "scripts": true,
+    "tests": true,
+    "**/tsconfig.json": true,
+    "yarn.lock": true,
+
+
+    
+    
+    
+    
+  }
+}
