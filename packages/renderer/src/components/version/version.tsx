@@ -2,7 +2,7 @@ import { Text, Box } from '@chakra-ui/react';
 import { version }   from 'package.json';
 
 const VersionBanner = () => {
-  const colorScheme = 'teal';
+  const colorScheme = 'red';
 
   return (
     <Box
