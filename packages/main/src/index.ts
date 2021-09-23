@@ -1,18 +1,13 @@
 // import * as Sentry                              from '@sentry/electron';
-import { is }                                   from 'electron-util';
-import type { BrowserWindowConstructorOptions } from 'electron';
-import { app }                                  from 'electron';
-import { MainProcess }                          from 'main-process';
-import { join }                                 from 'path';
-import { assertSingleInstance,
-  createLogger,
-  getAssetPath,
-  installDevExtension,
-  setAUMID } from 'utils';
+import { is }                                                                              from 'electron-util';
+import type { BrowserWindowConstructorOptions }                                            from 'electron';
+import { app }                                                                             from 'electron';
+import { MainProcess }                                                                     from 'main-process';
+import { join }                                                                            from 'path';
+import { assertSingleInstance, createLogger, getAssetPath, installDevExtension, setAUMID } from 'utils';
 
 assertSingleInstance();
 
-// prettier-ignore
 const DEFAULT_BROWSER_OPTIONS: BrowserWindowConstructorOptions = {
   width           : 600,
   height          : 800,

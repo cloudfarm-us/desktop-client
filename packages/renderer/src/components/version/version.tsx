@@ -2,7 +2,8 @@ import { Text, Box } from '@chakra-ui/react';
 import { version }   from 'package.json';
 
 const VersionBanner = () => {
-  const colorScheme = 'teal';
+  const colorScheme = 'red';
+  console.log(import.meta.env);
 
   return (
     <Box
@@ -27,7 +28,7 @@ const VersionBanner = () => {
         borderBottomEndRadius="sm"
         textTransform="uppercase"
       >
-        Version: {version}
+        {`Version: ${import.meta.env.MODE === 'development' ? '(Dev) ' : ''}${version}`}
       </Text>
     </Box>
   );

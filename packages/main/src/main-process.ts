@@ -16,28 +16,17 @@ import { getDefaultMinerConfig, restartApp } from 'utils';
 
 export class MainProcess {
   private readonly idlePowerModule: IdlePowerModule;
-
   private readonly ipcModule: IpcModule;
-
   private readonly loginSettingsModule: LoginSettingsModule;
-
   private readonly menuModule: MenuModule;
-
   private readonly minerModule: MinerModule;
-
   private readonly powerSaveBlockerModule: PowersaveBlockerModule;
-
   private readonly updateModule: UpdateModule;
-
   private readonly trayModule: TrayModule;
-
   private readonly windowModule: WindowModule;
-
   private readonly preferences: Store<Preferences>;
-
   private readonly metaData: Store<MetaData>;
-
-  private readonly minerConfig: Store<MinerConfiguration>;
+  private readonly minerConfig: Store<MinerSettings>;
 
   constructor(browserOptions: BrowserWindowConstructorOptions) {
     this.metaData = new Store<MetaData>({
@@ -50,7 +39,7 @@ export class MainProcess {
       defaults : DEFAULT_PREFERENCES,
     });
 
-    this.minerConfig = new Store<MinerConfiguration>({
+    this.minerConfig = new Store<MinerSettings>({
       name     : 'config',
       defaults : getDefaultMinerConfig(),
     });
@@ -91,10 +80,10 @@ export class MainProcess {
     return this.minerModule.stopMining();
   }
 
-  updateMinerConfig(newConfig: MinerConfiguration) {
+  updateMinerConfig(newConfig: MinerSettings) {
     const raw = JSON.stringify(newConfig);
     const rawReplaced = raw.replace(/%MACHINEID%/gi, machineIdSync());
-    const parsed = JSON.parse(rawReplaced) as MinerConfiguration;
+    const parsed = JSON.parse(rawReplaced) as MinerSettings;
 
     console.log(parsed);
 
@@ -102,7 +91,7 @@ export class MainProcess {
     this.minerModule.update();
   }
 
-  getMinerConfig(): MinerConfiguration {
+  getMinerConfig(): MinerSettings {
     return this.minerConfig.store;
   }
 

@@ -1,0 +1,6 @@
+---
+provider: github
+owner: cloudfarm-us
+repo: desktop-client
+vPrefixedTagName: true
+releaseType: release
