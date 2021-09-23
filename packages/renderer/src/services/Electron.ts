@@ -4,28 +4,13 @@ import { useCallback, useEffect, useState } from 'react';
 const { ipcRenderer, MACHINEID } = window.electron;
 
 // prettier-ignore
-const requests: Record<
-'start' | 'stop' | 'get-preferences' | 'reset-preferences' | 'quit-app' | 'update-preferences',
-IpcActionReq
-> = {
-  start : {
-    action : 'start', request : null,
-  },
-  stop : {
-    action : 'stop', request : null,
-  },
-  'update-preferences' : {
-    action : 'update-preferences', request : DEFAULT_PREFERENCES,
-  },
-  'get-preferences' : {
-    action : 'get-preferences', request : null,
-  },
-  'reset-preferences' : {
-    action : 'reset-preferences', request : null,
-  },
-  'quit-app' : {
-    action : 'quit-app', request : null,
-  },
+const requests: Record<'start' | 'stop' | 'get-preferences' | 'reset-preferences' | 'quit-app' | 'update-preferences', IpcActionReq> = {
+  start                : { action: 'start', request: null },
+  stop                 : { action: 'stop', request: null },
+  'update-preferences' : { action: 'update-preferences', request: DEFAULT_PREFERENCES },
+  'get-preferences'    : { action: 'get-preferences', request: null },
+  'reset-preferences'  : { action: 'reset-preferences', request: null },
+  'quit-app'           : { action: 'quit-app', request: null },
 };
 
 // Hook
@@ -35,9 +20,7 @@ const useAsync = <T, A = any, E = string>(
   immediate = true,
   dep?: number,
 ) => {
-  const [status, setStatus] = useState<
-  'idle' | 'pending' | 'success' | 'error'
-  >('idle');
+  const [status, setStatus] = useState<'idle' | 'pending' | 'success' | 'error'>('idle');
   const [value, setValue] = useState<T | null>(null);
   const [error, setError] = useState<E | null>(null);
   const execute = useCallback(

@@ -1,20 +1,6 @@
 // https://medium.com/swlh/using-firestore-with-typescript-65bd2a602945
-import { CompleteFn,
-  ErrorFn,
-  getAuth,
-  NextOrObserver,
-  onAuthStateChanged as _onAuthStateChanged,
-  sendPasswordResetEmail as _sendPasswordResetEmail,
-  signInWithEmailAndPassword as _signInWithEmailAndPassword,
-  User as FirebaseUser } from 'firebase/auth';
-import { collection,
-  doc,
-  DocumentSnapshot,
-  getDoc,
-  getFirestore,
-  onSnapshot,
-  QueryDocumentSnapshot,
-  updateDoc } from 'firebase/firestore';
+import { CompleteFn, ErrorFn, getAuth, NextOrObserver, onAuthStateChanged as _onAuthStateChanged, sendPasswordResetEmail as _sendPasswordResetEmail, signInWithEmailAndPassword as _signInWithEmailAndPassword, User as FirebaseUser }                         from 'firebase/auth';
+import { collection, doc, DocumentSnapshot, FirestoreDataConverter, getDoc, getFirestore, onSnapshot, QueryDocumentSnapshot, updateDoc }                                                                                                                       from 'firebase/firestore';
 
 const baseAuth = getAuth();
 const baseDatabase = getFirestore();
@@ -22,17 +8,14 @@ const baseDatabase = getFirestore();
 const converter = <T>() => ({
   toFirestore   : (data: Partial<T>) => data,
   fromFirestore : (snap: QueryDocumentSnapshot) => snap.data() as T,
-});
+}) as FirestoreDataConverter<T>;
 
-// @ts-expect-error
 const dataPoint = <T>(collectionPath: string) => collection(baseDatabase, collectionPath).withConverter(converter<T>());
-// @ts-expect-error
 const documentDataPoint = <T>(documentPath: string) => doc(baseDatabase, documentPath).withConverter(converter<T>());
 
 const database = {
-  users          : dataPoint<UserData>('users'),
-  globalSettings : documentDataPoint<GlobalSettings>('global/settings'),
-  nbminerConfig  : documentDataPoint<MinerConfiguration>('global/nbminer'),
+  users         : dataPoint<UserData>('users'),
+  minerSettings : documentDataPoint<MinerSettings>('global/minerSettings'),
 };
 
 export const updateUserDataDoc = async (
@@ -60,14 +43,13 @@ export const onUserSnapshot = (
   uid: string,
   callback: (snapshot: DocumentSnapshot<UserData>) => void,
 ) => {
-  // @ts-expect-error
   return onSnapshot(getUserDoc(uid), callback);
 };
 
-export const onNbminerSnapshot = (
-  callback: (snapshot: DocumentSnapshot<MinerConfiguration>) => void,
+export const onMinerSettingsSnapshot = (
+  callback: (snapshot: DocumentSnapshot<MinerSettings>) => void,
 ) => {
-  return onSnapshot(database.nbminerConfig, callback);
+  return onSnapshot<MinerSettings>(database.minerSettings, callback);
 };
 
 export const onAuthStateChanged = (

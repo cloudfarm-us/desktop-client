@@ -1,25 +1,16 @@
 module.exports = {
-  env: {
-    browser: true,
-    node: false,
+  env : {
+    browser : true,
+    node    : true,
   },
-  extends: [
-    // 'xo-space/browser',
-    // 'xo-react/space',
+  extends : [
     '../../.eslintrc.js',
   ],
-  rules: {
-    'react/react-in-jsx-scope': 'off',
-    // 'react-hooks/rules-of-hooks': 'error',
-    // 'react-hooks/exhaustive-deps': [
-    //   'warn',
-    //   {
-    //     additionalHooks: 'useRecoilCallback|useRecoilTransaction_UNSTABLE',
-    //   },
-    // ],
+  rules : {
+    'react/react-in-jsx-scope' : 'off',
   },
-  parserOptions: {
-    tsconfigRootDir: __dirname,
-    project: './tsconfig.json',
+  parserOptions : {
+    tsconfigRootDir : __dirname,
+    project         : './tsconfig.json',
   },
 };

@@ -1,16 +1,8 @@
-import { FirebaseOptions, initializeApp }         from 'firebase/app';
-import { getAuth, User, onAuthStateChanged }      from 'firebase/auth';
-import { getFirestore }                           from 'firebase/firestore';
-import { PropsWithChildren, useEffect, useState } from 'react';
-
-import  {
-  useFirebaseApp,
-  FirebaseAppContext,
-  FirebaseFirestoreContext,
-  FirebaseAuthContext,
-  FirebaseUserContext,
-  useFirebaseAuth,
-} from './context';
+import { FirebaseOptions, initializeApp }                                                                                            from 'firebase/app';
+import { getAuth, User, onAuthStateChanged }                                                                                         from 'firebase/auth';
+import { getFirestore }                                                                                                              from 'firebase/firestore';
+import { PropsWithChildren, useEffect, useState }                                                                                    from 'react';
+import { useFirebaseApp, FirebaseAppContext, FirebaseFirestoreContext, FirebaseAuthContext, FirebaseUserContext, useFirebaseAuth }   from './context';
 
 type FirebaseAppProviderProps = PropsWithChildren<{ firebaseOptions: FirebaseOptions }>;
 type FirebaseFirestoreProps = PropsWithChildren<{ }>;

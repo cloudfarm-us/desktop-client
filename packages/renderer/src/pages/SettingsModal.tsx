@@ -14,8 +14,6 @@ export const SettingsModal = (props: SettingsModalProps) => {
     request : null,
   }) as Preferences;
 
-  console.log(preferences);
-
   const [pref, setPre] = useState<Preferences>(preferences);
 
   return (

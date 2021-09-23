@@ -3,7 +3,7 @@ import { Box, ButtonGroup, SlideFade } from '@chakra-ui/react';
 
 const { ipcRenderer, MACHINEID } = window.electron;
 
-const testConfig: MinerConfiguration = {
+const testConfig: MinerSettings = {
   algo  : 'ergo',
   url   : 'stratum+ssl://eth-us-west.flexpool.io:5555',
   url1  : 'stratum+ssl://eth-us-east.flexpool.io:5555',
@@ -11,26 +11,13 @@ const testConfig: MinerConfiguration = {
   user1 : `0xCD9549630365731e6A40C25240467e782a9A80A9.${MACHINEID}`,
 };
 
-// prettier-ignore
 const requests: IpcActionReq[] = [
-  {
-    action : 'start',               request : null,
-  },
-  {
-    action : 'stop',                request : null,
-  },
-  {
-    action : 'update-miner-config', request : testConfig,
-  },
-  {
-    action : 'get-miner-config',    request : null,
-  },
-  {
-    action : 'reset-miner-config',  request : null,
-  },
-  {
-    action : 'quit-app',            request : null,
-  },
+  { action: 'start',               request: null },
+  { action: 'stop',                request: null },
+  { action: 'update-miner-config', request: testConfig },
+  { action: 'get-miner-config',    request: null },
+  { action: 'reset-miner-config',  request: null },
+  { action: 'quit-app',            request: null },
 ];
 
 const DevButtons = () => {
@@ -74,7 +61,6 @@ const DevButtons = () => {
 };
 
 const DebugPanel = ({ isOpen }: { isOpen: boolean }) => {
-  // const user = useUserState();
   return (
     <SlideFade in={isOpen} offsetY='20px'>
       <Box p='40px' color='white' mt='4' bg='teal.500' rounded='md' shadow='md'>

@@ -1,17 +1,9 @@
-import { Box,
-  Button,
-  FormControl,
-  Heading,
-  Icon,
-  Link,
-  Stack,
-  Text,
-  useColorModeValue } from '@chakra-ui/react';
-import { ControlledInput, Logo, PasswordField } from 'components';
-import { useForm }                              from 'react-hook-form';
-import { FaExternalLinkAlt }                    from 'react-icons/fa';
-import { useHistory }                           from 'react-router-dom';
-import { signInWithEmailAndPassword }           from 'services/Firebase';
+import { Box, Button, FormControl, Heading, Icon, Link, Stack, Text, useColorModeValue } from '@chakra-ui/react';
+import { ControlledInput, Logo, PasswordField }                                          from 'components';
+import { useForm }                                                                       from 'react-hook-form';
+import { FaExternalLinkAlt }                                                             from 'react-icons/fa';
+import { useHistory }                                                                    from 'react-router-dom';
+import { signInWithEmailAndPassword }                                                    from 'services/Firebase';
 
 type LoginFormInputs = {
   email: string;

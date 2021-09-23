@@ -1,4 +1,3 @@
-
 {
   "editor.tabSize": 2,
   "files.exclude": {
@@ -16,13 +15,7 @@
     // "README.md": true,
     // "scripts": true,
     "tests": true,
-    "**/tsconfig.json": true,
-    "yarn.lock": true,
-
-
-    
-    
-    
-    
+    // "**/tsconfig.json": true,
+    "yarn.lock": true
   }
 }

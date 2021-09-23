@@ -1,14 +1,9 @@
-import { Button,
-  ButtonGroup,
-  Divider,
-  Icon,
-  Stack,
-  useToast } from '@chakra-ui/react';
-import { ControlledInput }        from 'components';
-import { useForm }                from 'react-hook-form';
-import { IoArrowBackOutline }     from 'react-icons/io5';
-import { useHistory }             from 'react-router-dom';
-import { sendPasswordResetEmail } from 'services/Firebase';
+import { Button, ButtonGroup, Divider, Icon, Stack, useToast } from '@chakra-ui/react';
+import { ControlledInput }                                     from 'components';
+import { useForm }                                             from 'react-hook-form';
+import { IoArrowBackOutline }                                  from 'react-icons/io5';
+import { useHistory }                                          from 'react-router-dom';
+import { sendPasswordResetEmail }                              from 'services/Firebase';
 
 type SignupFormInputs = {
   email: string;

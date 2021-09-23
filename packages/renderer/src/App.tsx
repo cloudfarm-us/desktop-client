@@ -1,9 +1,9 @@
-import { useDisclosure }                                                            from '@chakra-ui/react';
-import { FloatingButtonGroup, PrivateOnlyRoute, PublicOnlyRoute, SuspenseFallback } from 'components';
-import { useUserState }                                                             from 'models/User';
-import { MemoryRouter as Router, Switch }                                           from 'react-router-dom';
-import { lazy, Suspense }                                                           from 'react';
-import { MACHINEID }                                                                from 'services/Electron';
+import { useDisclosure }                                                                           from '@chakra-ui/react';
+import { FloatingButtonGroup, PrivateOnlyRoute, PublicOnlyRoute, SuspenseFallback, VersionBanner } from 'components';
+import { useUserState }                                                                            from 'models/User';
+import { MemoryRouter as Router, Switch }                                                          from 'react-router-dom';
+import { lazy, Suspense }                                                                          from 'react';
+import { MACHINEID }                                                                               from 'services/Electron';
 
 const LinkedView = lazy(async () => import('pages/Linked'));
 const LoginView = lazy(async () => import('pages/Login'));
@@ -42,6 +42,7 @@ const App = (): JSX.Element => {
       <FloatingButtonGroup onOpenSettings={onOpenSettings} />
       <SettingsModal isOpen={isSettingsOpen} onClose={onSettingsClose} />
       <Routes />
+      <VersionBanner />
     </>
   );
 };

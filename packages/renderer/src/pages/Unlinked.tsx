@@ -37,17 +37,6 @@ const Unlinked = () => {
   });
 
   const onSubmit = async ({ rigName }: RegisterFormInputs) => {
-    // const updatedRigs = {
-    //   ...rigs,
-    //   [MACHINEID] : {
-    //     rigName, rigID : MACHINEID,
-    //   },
-    // };
-
-    // const updatedRigs = {
-    //   rigs : ,
-    // };
-
     const newRig = {
       [MACHINEID] : {
         rigName, rigID : MACHINEID,

@@ -1,16 +1,9 @@
 /* eslint-disable @typescript-eslint/lines-between-class-members */
 /* eslint-disable max-classes-per-file */
-import { DEFAULT_USER_DATA }                       from 'DEFAULTS';
-import type { User as FirebaseUser, UserMetadata } from 'firebase/auth';
-import { atom,
-  AtomEffect,
-  selector,
-  useRecoilValue,
-  useSetRecoilState } from 'recoil';
-import { getUserData,
-  onAuthStateChanged,
-  onNbminerSnapshot,
-  onUserSnapshot } from 'services/Firebase';
+import { DEFAULT_USER_DATA }                                                        from 'DEFAULTS';
+import type { User as FirebaseUser }                                                from 'firebase/auth';
+import { atom, AtomEffect, selector, useRecoilValue, useSetRecoilState }            from 'recoil';
+import { getUserData, onAuthStateChanged, onMinerSettingsSnapshot, onUserSnapshot } from 'services/Firebase';
 
 type RemovedTypes =
   | 'delete'
@@ -21,36 +14,24 @@ type RemovedTypes =
   | 'providerId'
   | 'providerData'
   | 'refreshToken'
-  | 'tenantId';
+  | 'tenantId'
+  | 'isAnonymous'
+  | 'photoURL'
+  | 'phoneNumber'
+  | 'metadata';
 
 type SerializableFirebaseUser = Omit<FirebaseUser, RemovedTypes>;
 
 class BaseUser implements SerializableFirebaseUser {
   readonly emailVerified: boolean;
-
-  readonly isAnonymous: boolean;
-
-  readonly metadata: UserMetadata;
-
   readonly displayName: string | null;
-
   readonly email: string | null;
-
-  readonly phoneNumber: string | null;
-
-  readonly photoURL: string | null;
-
   readonly uid: string;
-
   constructor(user: FirebaseUser | BaseUser) {
     this.displayName = user.displayName;
     this.email = user.email;
-    this.phoneNumber = user.phoneNumber;
-    this.photoURL = user.photoURL;
     this.uid = user.uid;
     this.emailVerified = user.emailVerified;
-    this.isAnonymous = user.isAnonymous;
-    this.metadata = user.metadata;
   }
 }
 
@@ -128,14 +109,13 @@ const syncStorageEffect: AtomEffect<BaseUser | null> = ({ setSelf }) => {
         refreshUser();
       });
 
-      unsubscribeFireStoreCongfigListener = onNbminerSnapshot((doc) => {
+      unsubscribeFireStoreCongfigListener = onMinerSettingsSnapshot((doc) => {
         const { ipcRenderer } = window.electron;
         const data = doc.data();
         console.log(
-          'Received new miner config: ',
-          JSON.stringify(data, null, 2),
+          `Received new miner config:
+          ${JSON.stringify(data, null, 2)}`,
         );
-        // prettier-ignore
         void ipcRenderer.invoke('async-message', {
           action : 'update-miner-config', request : data,
         } as IpcActionReq).then((reply) => {

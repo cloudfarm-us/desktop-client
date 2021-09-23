@@ -18,8 +18,15 @@
     "lib": [
       "ESNext"
     ],
+    "allowJs": true,
+    "checkJs": true,
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
   },
+  "include": [
+    "**/*",
+    "**/*.js",
+    "**/.eslintrc.js"
+  ]
 }

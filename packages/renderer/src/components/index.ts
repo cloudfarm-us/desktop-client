@@ -6,3 +6,4 @@ export * from './Logo';
 export * from './Modal';
 export * from './Routes';
 export * from './Text';
+export * from './version';
