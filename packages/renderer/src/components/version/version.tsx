@@ -2,7 +2,7 @@ import { Text, Box } from '@chakra-ui/react';
 import { version }   from 'package.json';
 
 const VersionBanner = () => {
-  const colorScheme = 'red';
+  const colorScheme = import.meta.env.MODE === 'development' ? 'red' : 'teal';
   console.log(import.meta.env);
 
   return (
